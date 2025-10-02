@@ -1,0 +1,14 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY Algoritmos10.py .
+COPY MainCalcAPI.py .
+
+CMD ["python", "MainCalcAPI .py"]
+
+EXPOSE 8080

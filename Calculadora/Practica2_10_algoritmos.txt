@@ -1,0 +1,337 @@
+10 Algoritmos:
+
+Algoritmos de recursividad:
+
+Conociendo el n-esimo numero de Catalan:
+
+Inicio
+	Funcion Catalan(n)
+		Si n=0 Entonces
+			Retornar 1
+		Sino
+			Catalina = 4 * n - 2
+			Caty = Catalina / (n + 1)
+			Retornar Caty * Catalan(n - 1)
+		FinSi
+	FinFuncion	
+	Imprimir("Encontraremos el n esimo numero de catalan, escriba un numero natural")
+	Leer n
+	Mostrar Catalan(n)
+Fin
+
+
+
+
+Calcular la cantidad de movimientos en las torres de hanoi usando n discos:
+
+Inicio
+	Funcion Hanoi(n)
+		Si n=1 Entonces
+			Retornar 1
+		Sino
+			Retornar (2 * Hanoi(n-1)) + 1
+		FinSi
+	FinFuncion	
+	Imprimir("Ingrese el numero de discos, para encontrar el numero de movimientos")
+	Leer n
+	Mostrar Hanoi(n)
+Fin
+
+Calcular el dobre factorial:
+
+Inicio
+	Funcion DobFact(n)
+		Si n=0 o n=1 Entonces
+			Retornar 1
+		Sino
+			Retornar n * DobFact(n-2)	
+		FinSi
+	FinFuncion
+	Imprimir("Escriba el numero del que quiere encontrar el dobre factorial")
+	Leer n
+	Mostrar DobFact(n)
+Fin
+
+
+Al Gusto:
+
+
+Criba de Eratostenes:
+
+Inicio
+ 	Declarar ListaPrimo = []
+  	Imprimir("Calcularemos los números primos entre 2 y n")
+  	Imprimir("Ingrese n")
+  	Leer n
+  	Para i = 2 Hasta n Hacer:
+    	ListaPrimo[i - 2] = i
+  	Para i = 2 Hasta raizCuadrada(n) Hacer:
+    	Si ListaPrimo[i - 2] != 0 Entonces
+      	Para j = i * i Hasta n Hacer con paso i:
+        	ListaPrimo[j - 2] = 0
+  	Imprimir("Los números primos son:")
+  	Para i = 0 Hasta Longitud(ListaPrimo) - 1 Hacer:
+    	Si ListaPrimo[i] != 0 Entonces
+      	Imprimir(ListaPrimo[i])
+Fin
+
+
+Calcular el area de un poligono regular de n lados.
+
+Inicio
+	Declarar Area real
+	Declarar Angulo real
+	Declarar AnguloPi real
+	Declarar Perimetro real
+	Declarar Apotema real
+	Imprimir("Ingrese la cantidad de lados")
+	Leer n
+	Imprimir("Ingrese la longitud del lado")
+	Leer L
+	Perimetro = n * L
+	Angulo = PI / n //(PI es la constante mas famosa de geometria)
+	Apotema = L / (2 * tan(Angulo))
+	Area = (Perimetro * Apotema) / 2
+	Imprimir("Area:", Area)
+    Imprimir("Perimetro:", Perimetro)
+Fin
+
+
+Verificar si un numero es un numero de Armstrong
+
+Inicio
+	Imprimir("Encontraremos si un numero es numero de Armstrong")
+	Imprimir("Ingrese el numero entero positivo")
+	Leer n
+	Definir r=0 entero
+	Definir suma=0 entero
+	Definir ListaDigitos = [] lista
+	Mientras n > 0 Hacer
+		digito = n % 10
+		ListaDigitos.append(digito)
+		n //= 10
+	FinMientras
+	r = longitud.ListaDigitos
+	Para i en ListaDigitos Hacer
+		suma = suma + i**r 
+	FinPara
+	Si suma = n Entonces
+		Imprimir(n, " es un numero de Armstrong")
+	Sino
+		Imprimir(n, " no es un numero de Armstrong")
+	FinSi
+Fin
+
+
+Algoritmos de Fisica, Conjuntos o estadistica.
+
+Esperanza matematica:
+
+Inicio
+	Imprimir("Encontraremos la esperanza matematica de una variable aleatoria discreta")
+	Imprimir("Ingrese el valor de los eventos probables seguido de la probabilidad de que sucedan")
+	Imprimir("Para finalizar presione la letra a para el evento")
+	Declarar ListaEventos = [] lista
+	Declarar ListaProbabilidades = [] lista
+	Declarar tamano = 0 entero
+	Declarar suma = 0 real
+	Mientras n =! a Hacer
+		Leer n entero
+		ListaEventos.append(n)
+		Leer p real
+		ListaProbabilidades.append(p)
+	FinMientras
+	tamano = longitud.ListaEventos
+	Para i=0 hasta tamano - 1 Hacer
+		suma = suma + (ListaEventos(i) * ListaProbabilidades(i))
+	FinPara
+	Imprimir("La esperezana matematica es ", suma)
+Fin
+
+Calculadora de diferentes medias
+
+Inicio
+	Imprimir("Ingrese una lista de números, calcularemos sus medias. Presione 0 para finalizar")
+	Declarar ListaMedias = [] lista
+	Declarar MediaCuadratica = 0 real
+	Declarar MediaGeometrica = 0 real
+	Declarar MediaAritmetica = 0 real
+	Declarar MediaArmonica = 0 real
+	Declarar Maximo = 0 real
+	Declarar Minimo = 0 real
+	Declarar L = 0 entero
+
+	Mientras True Hacer
+		Leer n
+		Si n == 0 Entonces
+		Salir del bucle
+		FinSi
+		ListaMedias.append(n)
+	FinMientras
+
+	L = longitud.ListaMedias
+	Maximo = max.ListaMedias
+	Minimo = min.ListaMedias
+
+	sum_val = 0.0
+	mult_val = 1.0
+	arm_sum_inv = 0.0
+	cuad_sum_sq = 0.0
+
+	Para i en ListaMedias Hacer
+		sum_val = sum_val + i
+		cuad_sum_sq = cuad_sum_sq + i**2
+		Si i <= 0 Entonces
+		mult_val = 0.0
+		FinSi
+		Si mult_val != 0.0 Entonces
+		mult_val = mult_val * i
+		FinSi
+		Si i == 0 Entonces
+		arm_sum_inv = infinito
+		Salir del bucle
+		FinSi
+		arm_sum_inv = arm_sum_inv + (1.0 / i)
+	FinPara
+
+	MediaAritmetica = sum_val / L
+	Si mult_val > 0 Entonces
+		MediaGeometrica = mult_val**(1.0/L)
+	Sino
+		MediaGeometrica = 0.0
+	FinSi
+	Si arm_sum_inv == infinito o arm_sum_inv == 0.0 Entonces
+		MediaArmonica = 0.0
+	Sino
+		MediaArmonica = L / arm_sum_inv
+	FinSi
+	MediaCuadratica = (cuad_sum_sq / L)**0.5
+
+	Imprimir("Media Aritmética: ", MediaAritmetica)
+	Imprimir("Media Geométrica: ", MediaGeometrica)
+	Imprimir("Media Armónica: ", MediaArmonica)
+	Imprimir("Media Cuadrática: ", MediaCuadratica)
+	Imprimir("Máximo: ", Maximo)
+	Imprimir("Mínimo: ", Minimo)
+Fin
+
+Algebra Lineal
+
+Determinante de una matriz
+
+Inicio
+	Declarar matriz = [] matriz
+	Declarar determinante = 0 real
+	Declarar n = 0 entero
+	Declarar swap_count = 0 entero
+
+	Leer matriz
+	n = longitud.matriz
+
+	Si n != longitud.matriz[0] Entonces
+		Imprimir("Error: La matriz no es cuadrada")
+		Salir
+	FinSi
+
+	swap_count = 0
+	Para k desde 0 hasta n-1 Hacer
+		max_row = k
+		Para i desde k+1 hasta n-1 Hacer
+		Si abs(matriz[i][k]) > abs(matriz[max_row][k]) Entonces
+			max_row = i
+		FinSi
+		FinPara
+		Si matriz[max_row][k] == 0 Entonces
+		determinante = 0
+		Salir
+		FinSi
+		Si max_row != k Entonces
+		Intercambiar filas k y max_row de matriz
+		swap_count = swap_count + 1
+		FinSi
+		Para i desde k+1 hasta n-1 Hacer
+		factor = matriz[i][k] / matriz[k][k]
+		Para j desde k hasta n-1 Hacer
+			matriz[i][j] = matriz[i][j] - factor * matriz[k][j]
+		FinPara
+		FinPara
+	FinPara
+
+	determinante = 1.0
+	Para i desde 0 hasta n-1 Hacer
+		determinante = determinante * matriz[i][i]
+	FinPara
+	Si swap_count % 2 != 0 Entonces
+		determinante = -determinante
+	FinSi
+
+	Imprimir("Determinante: ", determinante)
+Fin
+
+
+Inversa de una matriz
+
+Inicio
+	Declarar matriz = [] matriz
+	Declarar inversa = [] matriz
+	Declarar n = 0 entero
+
+	Leer matriz
+	n = longitud.matriz
+
+	Si n != longitud.matriz[0] Entonces
+		Imprimir("Error: La matriz no es cuadrada")
+		Salir
+	FinSi
+
+	Crear matriz aumentada con identidad
+	Para i desde 0 hasta n-1 Hacer
+		Para j desde 0 hasta 2*n-1 Hacer
+		Si j < n Entonces
+			matriz_aumentada[i][j] = matriz[i][j]
+		Sino
+			Si j - n == i Entonces
+			matriz_aumentada[i][j] = 1.0
+			Sino
+			matriz_aumentada[i][j] = 0.0
+			FinSi
+		FinSi
+		FinPara
+	FinPara
+
+	Para k desde 0 hasta n-1 Hacer
+		max_row = k
+		Para i desde k+1 hasta n-1 Hacer
+		Si abs(matriz_aumentada[i][k]) > abs(matriz_aumentada[max_row][k]) Entonces
+			max_row = i
+		FinSi
+		FinPara
+		Si matriz_aumentada[max_row][k] == 0 Entonces
+		Imprimir("La matriz es singular")
+		Salir
+		FinSi
+		Intercambiar filas k y max_row de matriz_aumentada
+		pivot_value = matriz_aumentada[k][k]
+		Para j desde k hasta 2*n-1 Hacer
+		matriz_aumentada[k][j] = matriz_aumentada[k][j] / pivot_value
+		FinPara
+		Para i desde 0 hasta n-1 Hacer
+		Si i != k Entonces
+			factor = matriz_aumentada[i][k]
+			Para j desde k hasta 2*n-1 Hacer
+			matriz_aumentada[i][j] = matriz_aumentada[i][j] - factor * matriz_aumentada[k][j]
+			FinPara
+		FinSi
+		FinPara
+	FinPara
+
+	Crear matriz inversa
+	Para i desde 0 hasta n-1 Hacer
+		Para j desde 0 hasta n-1 Hacer
+		inversa[i][j] = matriz_aumentada[i][j + n]
+		FinPara
+	FinPara
+
+	Imprimir("Matriz inversa:")
+	Imprimir(inversa)
+Fin
