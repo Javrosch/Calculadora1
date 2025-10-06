@@ -41,19 +41,9 @@ def Area_poligono(Lado, NumLados):
     return area
 
 def Armstrong(n):
-    suma = 0
-    ListaDigitos = []
-    while n > 0:
-        digito = n % 10
-        ListaDigitos.append(digito)
-        n = n // 10
-    num_digitos = len(ListaDigitos)
-    for digito in ListaDigitos:
-        suma += digito ** num_digitos
-    if suma == 0:
-        return True
-    else:
-        return False
+    original_n = n
+    num_digitos = len(str(n))
+    return sum(int(digito) ** num_digitos for digito in str(n)) == original_n
     
 def Esperanza():
     valores_posibles = []

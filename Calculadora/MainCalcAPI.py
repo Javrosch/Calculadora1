@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
 import requests
-from Algoritmos10 import Catalan, Hanoi, DobFact, Criba, Area_poligono, Armstrong, Esperanza, Determinant_Gauss, FourMeans, Inverse_GaussJordan
-
+from Algoritmos10 import Catalan, Hanoi, DobFact, Criba, Area_poligono, Armstrong, Esperanza, Determinant_Gauss, FourMeans, Inverse_GaussJordan 
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def raiz():
+    print("Solicitud recibida en la raíz")
+    return "Servidor funcionando"
 
 @app.route('/catalan', methods=['GET'])
 def calcular_catalan():
@@ -94,24 +98,21 @@ def calcular_means():
     except Exception as e:
         return jsonify({'error': f'An unexpected error occurred: {str(e)}'}), 500
 
-    @app.route('/inverse', methods=['POST'])
-    def calcular_inverse():
-        try:
-            data = request.json
-            matrix = data.get('matrix')
-            if not matrix or not isinstance(matrix, list):
-                return jsonify({'error': 'Faltan datos de la matriz '}), 400
-            N = len(matrix)
-            if not N or not all(len(row) == N for row in matrix):
-                return jsonify({'error': 'La Matriz debe ser no vacia y cuadrada'}), 400
-            result = Inverse_GaussJordan(matrix)
-            if result == "La Matriz es singular":
-                return jsonify({'error': 'La Matriz es singular, no existe la inversa'}), 400
-            return jsonify({'inverse_matrix': result})
-        except ValueError as e:
-            return jsonify({'error': str(e)}), 400
-        except Exception as e:
-            return jsonify({'error': 'Error en el calculo: ' + str(e)}), 500
-
+print("Definiendo ruta /inverse")
+@app.route('/inverse', methods=['POST'])
+def calcular_inverse():
+    print("Solicitud recibida en /inverse")
+    try:
+        data = request.json
+        print("Datos recibidos:", data)
+        matrix = data.get('matrix')
+        print("Matriz recibida:", matrix)
+        result = Inverse_GaussJordan(matrix)
+        print("Resultado:", result)
+        return jsonify({'inverse_matrix': result})
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
+                        
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=3500)

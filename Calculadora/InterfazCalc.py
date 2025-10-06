@@ -126,6 +126,7 @@ class InterfazCalc:
         tk.Button(self.frame_determinant, text="Calculate Determinant", command=self.calcular_determinant).pack(pady=10)
         self.label_resultado_determinant = tk.Label(self.frame_determinant, text="")
         self.label_resultado_determinant.pack()
+
     def generate_matrix_grid(self):
         for widget in self.grid_frame.winfo_children():
             widget.destroy()
@@ -142,22 +143,8 @@ class InterfazCalc:
                 row_entries.append(entry)
             self.matrix_entries.append(row_entries)
 
-    def crear_widgets_inverse(self):
-            tk.Label(self.frame_inverse, text="--- Matrix Inverse (Gauss-Jordan) ---").pack(pady=5)
-            tk.Label(self.frame_inverse, text="Select Matrix Size (N x N):").pack()
-            self.inverse_matrix_size_var = tk.StringVar(value=3)
-            tk.OptionMenu(self.frame_inverse, self.inverse_matrix_size_var, *list(map(str, range(2, 6)))).pack(pady=5)
-            tk.Button(self.frame_inverse, text="Generate Input Grid", command=self.generate_inverse_matrix_grid).pack(pady=5)
-            self.inverse_grid_frame = tk.Frame(self.frame_inverse)
-            self.inverse_grid_frame.pack(pady=10)
-            self.inverse_matrix_entries = []
-            self.generate_inverse_matrix_grid()
-
-            tk.Button(self.frame_inverse, text="Calculate Inverse", command=self.calcular_inverse).pack(pady=10)
-            self.label_resultado_inverse = tk.Label(self.frame_inverse, text="", justify=tk.LEFT)
-            self.label_resultado_inverse.pack()
-
     def generate_inverse_matrix_grid(self):
+        # Código del método
         for widget in self.inverse_grid_frame.winfo_children():
             widget.destroy()
         self.inverse_matrix_entries.clear()
@@ -172,6 +159,20 @@ class InterfazCalc:
                 entry.grid(row=i, column=j, padx=2, pady=2)
                 row_entries.append(entry)
             self.inverse_matrix_entries.append(row_entries)
+
+    def crear_widgets_inverse(self):
+        tk.Label(self.frame_inverse, text="--- Matrix Inverse (Gauss-Jordan) ---").pack(pady=5)
+        tk.Label(self.frame_inverse, text="Select Matrix Size (N x N):").pack()
+        self.inverse_matrix_size_var = tk.StringVar(value=3)
+        tk.OptionMenu(self.frame_inverse, self.inverse_matrix_size_var, *list(map(str, range(2, 6)))).pack(pady=5)
+        tk.Button(self.frame_inverse, text="Generate Input Grid", command=self.generate_inverse_matrix_grid).pack(pady=5)
+        self.inverse_grid_frame = tk.Frame(self.frame_inverse)
+        self.inverse_grid_frame.pack(pady=10)
+        self.inverse_matrix_entries = []
+        self.generate_inverse_matrix_grid()  # Llamar al método aquí
+        tk.Button(self.frame_inverse, text="Calculate Inverse", command=self.calcular_inverse).pack(pady=10)
+        self.label_resultado_inverse = tk.Label(self.frame_inverse, text="", justify=tk.LEFT)
+        self.label_resultado_inverse.pack()
     
     def crear_widgets_means(self):
         tk.Label(self.frame_means, text="--- Calculation of Four Means ---").pack(pady=5)
@@ -184,38 +185,38 @@ class InterfazCalc:
     
     def calcular_catalan(self):
         n = int(self.entry_catalan.get())
-        respuesta = requests.get(f"http://localhost:8080/catalan?n={n}")
+        respuesta = requests.get(f"http://localhost:3500/catalan?n={n}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_catalan.config(text=f"Resultado: {resultado}")
 
     def calcular_hanoi(self):
         n = int(self.entry_hanoi.get())
-        respuesta = requests.get(f"http://localhost:8080/hanoi?n={n}")
+        respuesta = requests.get(f"http://localhost:3500/hanoi?n={n}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_hanoi.config(text=f"Resultado: {resultado}")
 
     def calcular_dobfact(self):
         n = int(self.entry_dobfact.get())
-        respuesta = requests.get(f"http://localhost:8080/dobfact?n={n}")
+        respuesta = requests.get(f"http://localhost:3500/dobfact?n={n}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_dobfact.config(text=f"Resultado: {resultado}")
 
     def calcular_criba(self):
         n = int(self.entry_criba.get())
-        respuesta = requests.get(f"http://localhost:8080/criba?n={n}")
+        respuesta = requests.get(f"http://localhost:3500/criba?n={n}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_criba.config(text=f"Resultado: {resultado}")
     
     def calcular_area_poligono(self):
         Lado = float(self.entry_area_poligono_lado.get())
         NumLados = int(self.entry_area_poligono_numlados.get())
-        respuesta = requests.get(f"http://localhost:8080/poligono?n={Lado}&m={NumLados}")
+        respuesta = requests.get(f"http://localhost:3500/poligono?n={Lado}&m={NumLados}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_area_poligono.config(text=f"Resultado: {resultado}")
 
     def calcular_armstrong(self):
         n = int(self.entry_armstrong.get())
-        respuesta = requests.get(f"http://localhost:8080/armstrong?n={n}")
+        respuesta = requests.get(f"http://localhost:3500/armstrong?n={n}")
         resultado = respuesta.json()["resultado"]
         self.label_resultado_armstrong.config(text=f"Resultado: {resultado}")
     
@@ -223,7 +224,7 @@ class InterfazCalc:
         valores = list(map(int, self.entry_valores.get().split(',')))
         probabilidades = list(map(float, self.entry_probabilidades.get().split(',')))
         datos = {'valores': valores, 'probabilidades': probabilidades}
-        respuesta = requests.post("http://localhost:8080/esperanza", json=datos)
+        respuesta = requests.post("http://localhost:3500/esperanza", json=datos)
         if respuesta.status_code == 200:
             resultado = respuesta.json()["esperanza"]
             self.label_resultado_esperanza.config(text=f"Esperanza Matemática: {resultado}")
@@ -242,7 +243,7 @@ class InterfazCalc:
                 matrix.append(row)
 
             datos = {'matrix': matrix}
-            respuesta = requests.post(f"http://localhost:8080/determinant", json=datos)
+            respuesta = requests.post(f"http://localhost:3500/determinant", json=datos)
 
             if respuesta.status_code == 200:
                 resultado = respuesta.json()["resultado"]
@@ -263,7 +264,7 @@ class InterfazCalc:
             if not data_list:
                 return {"error": "Ingrese al menos un número."}
             datos = {'data': data_list}            
-            respuesta = requests.post(f"http:localhost:8080/means", json=datos)
+            respuesta = requests.post(f"http://localhost:3500/means", json=datos)
             if respuesta.status_code == 200:
                 return respuesta.json()
             else:
@@ -295,11 +296,24 @@ class InterfazCalc:
             for i in range(N):
                 row = []
                 for j in range(N):
-                    value = float(self.inverse_matrix_entries[i][j].get() or 0)
-                    row.append(value)
+                    print(f"Obteniendo valor de fila {i}, columna {j}")
+                    value = self.inverse_matrix_entries[i][j].get().strip() 
+                    print(f"Valor obtenido: {value}")
+                    if not value:  # Verifica si el valor está vacío
+                        print("Error: Valor vacío")
+                        self.label_resultado_inverse.config(text="Error: Valor vacío")
+                        return
+                    try:
+                        row.append(float(value))
+                    except ValueError:
+                        print(f"Error al convertir {value} a float")
+                        self.label_resultado_inverse.config(text=f"Error: El valor '{value}' no es un número válido")
+                        return
                 matrix.append(row)
             datos = {'matrix': matrix}
-            respuesta = requests.post('http://localhost:8080/inverse', json=datos)
+            print(datos)
+            respuesta = requests.post('http://127.0.0.1:3500/inverse', json=datos)
+            print(respuesta.status_code)
             if respuesta.status_code == 200:
                 inverse_matrix = respuesta.json()["inverse_matrix"]
                 matrix_str = "Inverse Matrix:\n"
